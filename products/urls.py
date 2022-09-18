@@ -1,7 +1,9 @@
+from django.urls import path, include
+from products import views
 
-from django.urls import path,include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    
+    path('productcategory/', views.ProductCategoryList.as_view()),
+    path('product/', views.ProductList.as_view()),
+    path('product/<int:pk>/', views.ProductDetails.as_view()),
 ]

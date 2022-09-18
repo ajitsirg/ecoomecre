@@ -1,4 +1,6 @@
+from unicodedata import category
 from django.db import models
+from vendor.models import *
 
 # Create your models here.
 
@@ -16,10 +18,13 @@ class ProductCategory(models.Model):
     
 class Products(models.Model): 
     title=models.CharField(max_length=255, blank=True,)
+    category=models.ForeignKey(ProductCategory,on_delete=models.SET_NULL,null=True)
+    vendor=models.ForeignKey(Vendor,on_delete=models.SET_NULL,null=True)
     product_details=models.TextField(blank=True, null=True)
     price=models.DecimalField(max_digits=8, decimal_places=2,blank=True)
     margin=models.DecimalField(max_digits=8, decimal_places=2,blank=True)
     discount=models.DecimalField(max_digits=8, decimal_places=2,blank=True)
+    actual_price=models.DecimalField(max_digits=8, decimal_places=2,blank=True)
     
     def __str__(Products) :
         return Products.title
