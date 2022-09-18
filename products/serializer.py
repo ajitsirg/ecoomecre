@@ -27,6 +27,29 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields =['id','order_number','coustmer','created','updated']
+    
+
+    def __init__(self, *args, **kwargs):
+        super(OrderSerializer, self).__init__(*args,**kwargs)
+        self.Meta.depth = 1
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields =['id','order','product']
+    
+
+    def __init__(self, *args, **kwargs):
+        super(OrderItemSerializer, self).__init__(*args,**kwargs)
+        self.Meta.depth = 1
+
+
+
+
 
 
 

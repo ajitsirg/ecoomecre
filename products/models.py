@@ -1,5 +1,6 @@
 from unicodedata import category
 from django.db import models
+from user.models import Coustmer
 from vendor.models import *
 
 # Create your models here.
@@ -32,4 +33,24 @@ class Products(models.Model):
     
     class Meta:
         verbose_name_plural = "Products"
-       
+
+
+
+class Order(models.Model):
+    order_number=models.CharField(max_length=8,unique=True)
+    coustmer=models.ForeignKey(Coustmer,on_delete=models.CASCADE, related_name='coustmer_orders')
+    created=models.DateTimeField(auto_now_add=True)
+    updated=models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return '%s' (self.created)
+
+
+
+
+class OrderItem(models.Model):
+    order=models.ForeignKey(Order,on_delete=models.CASCADE,related_name='order_items')
+    product=models.ForeignKey(Products,on_delete=models.CASCADE)
+
+    def __init__(self):
+        return self.product.title
