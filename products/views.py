@@ -36,10 +36,21 @@ class OrderList(generics.ListCreateAPIView):
 
 
 
-class OrderDetails(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Order.objects.all()
+class OrderDetails(generics.ListAPIView):
+    # queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes=[permissions.IsAuthenticated] 
+    
+
+    def get_queryset(self):
+        order_id=self.kwargs['pk']
+        order=Order.objects.get(id=order_id)
+        order_item=OrderItem.objects.filter(order=order)
+        return order_item
+
+
+
+
 
 
 class OrderItemList(generics.ListCreateAPIView):
@@ -54,3 +65,9 @@ class OrderItemDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
     permission_classes=[permissions.IsAuthenticated] 
+
+
+
+
+
+

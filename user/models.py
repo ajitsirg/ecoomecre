@@ -17,5 +17,6 @@ class Coustmer(models.Model):
     pincode = models.IntegerField(max_length=6,blank=True,null=True)
     gender=models.CharField(max_length=10 ,choices=gender_option,default='male')
 
-    def __init__(self):
+    def __str__(self):
         return self.name
+    

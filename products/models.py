@@ -45,6 +45,9 @@ class Order(models.Model):
     def __unicode__(self):
         return '%s' (self.created)
 
+    def __str__(Order) :
+        return Order.order_number    
+
 
 
 
@@ -52,5 +55,5 @@ class OrderItem(models.Model):
     order=models.ForeignKey(Order,on_delete=models.CASCADE,related_name='order_items')
     product=models.ForeignKey(Products,on_delete=models.CASCADE)
 
-    def __init__(self):
+    def __str__(self):
         return self.product.title
